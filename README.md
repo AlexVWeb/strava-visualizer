@@ -6,9 +6,13 @@ Une application web qui affiche tous vos parcours de course enregistrés sur Str
 
 - Authentification avec Strava via OAuth 2.0
 - Affichage de tous vos parcours de course sur une carte interactive
-- Filtrage des activités par type (course, vélo)
-- Statistiques sur vos activités (distance totale, dénivelé, etc.)
+- Filtrage des activités par type (course, vélo, etc.)
+- Filtrage des activités par année
+- Statistiques détaillées sur vos activités (distance totale, dénivelé, temps total)
+- Sélection d'une activité spécifique pour voir son parcours en détail
+- Différents styles de carte disponibles (clair, sombre)
 - Interface responsive pour mobile et desktop
+- Affichage/masquage de la barre latérale pour une vue plein écran de la carte
 
 ## Stack technique
 
@@ -16,6 +20,7 @@ Une application web qui affiche tous vos parcours de course enregistrés sur Str
 - React pour le framework frontend
 - Tailwind CSS pour le styling
 - Leaflet pour l'affichage et la gestion de la carte
+- Mapbox pour les styles de carte
 - API Strava pour la récupération des données
 
 ## Prérequis
@@ -23,12 +28,28 @@ Une application web qui affiche tous vos parcours de course enregistrés sur Str
 - Node.js (v16 ou supérieur)
 - Un compte Strava
 - Une application Strava enregistrée (pour obtenir les identifiants API)
+- Un compte Mapbox (pour obtenir un token d'accès)
+
+## Variables d'environnement
+
+Créez un fichier `.env` à la racine du projet avec les variables suivantes :
+
+```
+VITE_STRAVA_CLIENT_ID=votre_client_id_strava
+VITE_STRAVA_CLIENT_SECRET=votre_client_secret_strava
+VITE_MAPBOX_TOKEN=votre_token_mapbox
+```
+
+Pour obtenir ces valeurs :
+1. **VITE_STRAVA_CLIENT_ID** et **VITE_STRAVA_CLIENT_SECRET** : Créez une application sur la [console développeur Strava](https://www.strava.com/settings/api)
+2. **VITE_MAPBOX_TOKEN** : Créez un compte sur [Mapbox](https://www.mapbox.com/) et générez un token d'accès public
 
 ## Configuration
 
 1. Créez une application sur la [console développeur Strava](https://www.strava.com/settings/api)
 2. Notez votre Client ID et Client Secret
 3. Configurez l'URL de callback pour l'authentification OAuth à `http://localhost:5173/auth/callback` (pour le développement)
+4. Créez un compte sur [Mapbox](https://www.mapbox.com/) et générez un token d'accès public
 
 ## Installation
 
@@ -43,12 +64,8 @@ Une application web qui affiche tous vos parcours de course enregistrés sur Str
    npm install
    ```
 
-3. Configurez vos identifiants Strava
-   Ouvrez le fichier `src/services/strava.ts` et remplacez les valeurs suivantes :
-   ```typescript
-   const STRAVA_CLIENT_ID = 'VOTRE_CLIENT_ID';
-   const STRAVA_CLIENT_SECRET = 'VOTRE_CLIENT_SECRET';
-   ```
+3. Configurez vos variables d'environnement
+   Créez un fichier `.env` à la racine du projet avec les variables mentionnées ci-dessus.
 
 4. Lancez l'application en mode développement
    ```bash
